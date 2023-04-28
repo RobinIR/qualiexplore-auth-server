@@ -68,7 +68,7 @@ Three MongoDb has encrypted users collection.
 
 2. Download the already built image from Docker hub, using the command below.
 
-    `docker pull hrabhijith/gql-mongo:quali`
+    `docker pull robinkuri/gql-mongo:quali`
 
 3. Run the below command in the terminal. (use docker compose with env_vars for this step instead, see below for more info)
 
