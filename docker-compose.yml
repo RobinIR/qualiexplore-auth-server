@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  gql-mongo:
+    ports:
+      - "5000:5000"
+
+    env_file:
+      - .env
+
+    image: robinkuri/gql-mongo:quali
