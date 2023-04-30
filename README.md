@@ -72,7 +72,7 @@ Three MongoDb has encrypted users collection.
 
 3. Run the below command in the terminal. (use docker compose with env_vars for this step instead, see below for more info)
 
-    `docker run --name <container_name> -p 5000:5000 hrabhijith/gql-mongo:quali`
+    `docker run --name <container_name> -p 5000:5000 robinkuri/gql-mongo:quali`
 
 4. The application will start running at localhost:<required_port>.
 
