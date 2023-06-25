@@ -76,14 +76,25 @@ class Query(graphene.ObjectType):
     def resolve_users(self, info):
         users_list = list(UsersModel.objects.all())
         key = os.getenv('JWT_SECRET_KEY')
-        fernet = Fernet(key)
-        for users in users_list:
-            for user in users.users:
-                decrypted_username = fernet.decrypt(user.username.encode('utf-8'))
-                user.username = decrypted_username.decode('utf-8')
-                user.username_decrypted = True  # Optional flag to indicate that username has been decrypted
+        fernet = None
+        
+        if key is None:
+            raise ValueError("Invalid JWT_SECRET_KEY. Key not found or not set.")
+        
+        try:
+            fernet = Fernet(key)
+            for users in users_list:
+                for user in users.users:
+                    try:
+                        decrypted_username = fernet.decrypt(user.username.encode('utf-8'))
+                        user.username = decrypted_username.decode('utf-8')
+                        user.username_decrypted = True
+                    except Exception:
+                        raise ValueError("Invalid Secret Key To Decrypt Data")
+        except Exception as e:
+            raise ValueError(f"Error occurred: {str(e)}")
+        
         return users_list
-
 
 # All mutations are implemented as Graphene object type
 class MyMutations(graphene.ObjectType):
