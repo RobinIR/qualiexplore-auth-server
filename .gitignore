@@ -1,3 +1,9 @@
+# Ignore .env files
+.env
+
+# Ignore venv directory (Python virtual environment)
+venv/
 env/
-models/
+
+# Ignore pychache
 __pycache__/
